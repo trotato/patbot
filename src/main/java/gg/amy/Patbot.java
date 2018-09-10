@@ -41,6 +41,32 @@ public final class Patbot {
                     }
                     
                     @Override
+                    public void onGuildMessageReceived(final GuildMessageReceivedEvent event) {
+                        if(event.getChannel().getId().equalsIgnoreCase(CHANNEL)) {
+                            if(!event.getMessage().getContentRaw().equalsIgnoreCase("pat me please")) {
+                                if(!ALLOWED_IDS.contains(event.getAuthor().getId())) {
+                                    event.getMessage().delete().queue();
+                                }
+                            } else {
+                                event.getChannel().sendMessage(event.getAuthor().getAsMention() + " *pats*").queue();
+                            }
+                        }
+                    } 
+                   
+                    @Override
+                    public void onGuildMessageReceived(final GuildMessageReceivedEvent event) {
+                        if(event.getChannel().getId().equalsIgnoreCase(CHANNEL)) {
+                            if(!event.getMessage().getContentRaw().equalsIgnoreCase("please pat me")) {
+                                if(!ALLOWED_IDS.contains(event.getAuthor().getId())) {
+                                    event.getMessage().delete().queue();
+                                }
+                            } else {
+                                event.getChannel().sendMessage(event.getAuthor().getAsMention() + " *pats*").queue();
+                            }
+                        }
+                    }
+                    
+                    @Override
                     public void onGuildMessageUpdate(final GuildMessageUpdateEvent event) {
                         if(event.getChannel().getId().equalsIgnoreCase(CHANNEL)) {
                             if(!event.getMessage().getContentRaw().equalsIgnoreCase("pat me")) {
